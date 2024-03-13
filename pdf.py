@@ -18,6 +18,10 @@ def get_index(data, index_name):
 
 
 pdf_path = os.path.join("data", "Seoul.pdf")
+pdf1_path = os.path.join("data", "japnese and korean companies in india.pdf")
 seoul_pdf = PDFReader().load_data(file=pdf_path)
+company_pdf = PDFReader().load_data(file=pdf1_path)
 seoul_index = get_index(seoul_pdf, "seoul")
+company_index = get_index(company_pdf, "company")
 seoul_engine = seoul_index.as_query_engine()
+company_engine = company_index.as_query_engine()
