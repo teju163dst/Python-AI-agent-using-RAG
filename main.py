@@ -8,10 +8,11 @@ from llama_index.tools import QueryEngineTool, ToolMetadata
 from llama_index.agent import ReActAgent
 from llama_index.llms import OpenAI
 from pdf import seoul_engine
+from pdf import company_engine
 
 load_dotenv()
 
-population_path = os.path.join("data", "population.csv")
+population_path = os.path.join("data", "population.csv") 
 population_df = pd.read_csv(population_path)
 
 population_query_engine = PandasQueryEngine(
@@ -32,9 +33,16 @@ tools = [
         query_engine=seoul_engine,
         metadata=ToolMetadata(
             name="seoul_data",
-            description="this gives detailed information about canada the country",
+            description="this gives detailed information about seoul",
         ),
-    ),
+    ),    
+    QueryEngineTool(
+        query_engine=company_engine,
+        metadata=ToolMetadata(
+            name="company_data",
+            description="this gives detailed information about companies",
+        ),    
+    )
 ]
 
 llm = OpenAI(model="gpt-3.5-turbo-0613")
